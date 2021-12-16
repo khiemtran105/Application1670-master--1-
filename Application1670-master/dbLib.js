@@ -7,4 +7,12 @@ function requiresLogin(req, res, next) {
     }
 }
 
-module.exports = { requiresLogin }
+function requiresAdmin(req, res, next) {
+    if (req.session["admin"]) {
+        return next()
+    } else {
+        res.redirect('/login')
+    }
+}
+
+module.exports = { requiresLogin, requiresAdmin }
